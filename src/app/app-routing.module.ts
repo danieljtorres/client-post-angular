@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 
-import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { BlogModule } from './blog/blog.module';
+import { RouterModule, Routes,  } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', loadChildren: () => BlogModule },
-  { path: 'login', component: LoginComponent},
-  { path: '**', redirectTo: 'login', pathMatch: 'full' }
+  { path: '', loadChildren: './pdf/pdf.module#PdfModule', data: { preload: true } },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
 
 @NgModule({

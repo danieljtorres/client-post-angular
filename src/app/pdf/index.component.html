@@ -1,0 +1,37 @@
+<div class="row p-0">
+  <div class="col-md-12 pt-2 pb-2" style="background-color: #3a3a3a;">
+    <div class="row p-0">  
+      <div class="col-lg-3">
+        <div class="input-group">
+          <input id="cedula" required autofocus class="form-control" [(ngModel)]="cedula" type="text" placeholder="Cedula" #inputCedula="ngModel">
+          <span class="input-group-btn">
+            <button [disabled]="!inputCedula.valid" type="button" class="btn btn-primary pointer" (click)="getUser()">Generar</button>
+          </span>
+        </div>
+      </div>
+      <div class="col-lg-3" [hidden]="inputCedula.valid || inputCedula.pristine">
+          <div class="alert alert-danger mb-0" style="padding: .35rem !important;">
+          Debe ingresar una cedula valida
+          </div>
+      </div>
+      <div *ngIf="user.cedula"  class="col-lg-2">
+        <button type="download" class="btn btn-primary pointer" (click)="downloadPdf()">Descargar</button>
+      </div>
+    </div>
+    
+  </div> 
+  <div class="col-md-12 p-0" style="background-color: #3a3a3a; height: calc(100vh - 57px)">
+    <embed *ngIf="user.cedula" style="width: 100%; height:99%; margin: 0px; padding: 0px;" scrolling="no" [src]="base64+'#zoom=50' | safe">
+    <div *ngIf="!user.cedula"  style="width: 100%; height: calc(100vh - 57px); display:flex; justify-content:center; align-items:center;">
+      <h3 *ngIf="!error && !loading" class="text-white">Intruduzca su cedula en el  <span class="badge badge-primary"><label for="cedula" class="mt-1 mb-1">CAMPO</label></span> de la barra superior</h3>
+      <h3 *ngIf="error && !loading" class="text-white">
+        <span class="badge text-white" [ngClass]="{'badge-warning': error.status == '404', 'badge-danger': error.status == '500'}"><label class="mt-1 mb-1">{{error.msg}}</label></span>
+      </h3>
+      
+      <div *ngIf="loading" style="text-align:center;">
+        <img src="/assets/images/loader.gif" alt="Cargando..." width="25">
+        <p class=text-white>Cargando...</p>
+      </div>
+    </div>
+  </div> 
+</div>

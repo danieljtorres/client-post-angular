@@ -1,9 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
 
+body{
+  background-color: #3a3a3a;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
 .ng-valid[required], .ng-valid.required  {
   border-left: 5px  solid #42A948; /* green */
 }
 
 .ng-invalid:not(form)  {
   border-left: 5px  solid #a94442; /* red */
+}
+
+.btn-primary.focus, .btn-primary:focus {
+  box-shadow: 0 0 0 0 rgba(0,123,255,.5);
+}
+
+.form-control:focus {
+  color: #495057;
+  background-color: #fff;
+  border-color: #80bdff;
+  outline: 0;
+  box-shadow: 0 0 0 0 rgba(0,123,255,.25);
 }
