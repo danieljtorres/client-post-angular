@@ -1,5 +1,5 @@
 {
-  "name": "client-post-angular",
+  "name": "certificado",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -24,6 +24,7 @@
     "bootstrap": "^4.0.0-beta.2",
     "core-js": "^2.4.1",
     "jquery": "^1.9.1",
+    "jwt-decode": "^2.2.0",
     "popper.js": "^1.12.9",
     "rxjs": "^5.5.2",
     "zone.js": "^0.8.14"
