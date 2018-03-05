@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import * as jsPDF from 'jspdf';
+import { Signatory } from '../-interfaces/signatory';
 
 @Injectable()
 export class PdfService {
@@ -111,6 +112,39 @@ export class PdfService {
       array.push(joinstr);
   }
     return array;
+  }
+
+  addSignatories(signatories: Array<Signatory>) {
+    this.doc.setDrawColor(0, 0, 0); this.doc.setLineWidth(1.5);
+    const columns = (this.doc.internal.pageSize.width - 50) / signatories.length;
+    let i = 25;
+    signatories.forEach((el, index) => {
+      i = i + columns;
+      const start = (i - (columns / 2)) - 100;
+      const end = (i - (columns / 2)) + 100;
+      this.doc.line(start, this.y , end, this.y);
+    });
+    i = 25;
+    this.setY(20);
+    this.doc.setFontType('bold');
+    signatories.forEach((el, index) => {
+      i = i + columns;
+      const textWidth = this.doc.getStringUnitWidth(el.nombres) * this.doc.internal.getFontSize() / this.doc.internal.scaleFactor;
+      const textOffset = (i - (columns / 2)) - textWidth / 2;
+      console.log([i, textWidth, textOffset]);
+      this.doc.text(textOffset, this.y, el.nombres);
+    });
+
+    i = 25;
+    this.setY(15);
+    this.doc.setFontType('normal');
+    signatories.forEach((el, index) => {
+      i = i + columns;
+      const textWidth = this.doc.getStringUnitWidth(el.titulo) * this.doc.internal.getFontSize() / this.doc.internal.scaleFactor;
+      const textOffset = (i - (columns / 2)) - textWidth / 2;
+      console.log([i, textWidth, textOffset]);
+      this.doc.text(textOffset, this.y, el.titulo);
+    });
   }
 
 }
